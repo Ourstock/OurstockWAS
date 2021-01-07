@@ -1,2 +1,2 @@
 # Ourstock WAS
-Outstock web application repository
+Outstock web application repository.
