@@ -1,2 +1,2 @@
-# Ourstock WAS
-Outstock web application repository.
+# OutstockAPI
+Outstock api code
