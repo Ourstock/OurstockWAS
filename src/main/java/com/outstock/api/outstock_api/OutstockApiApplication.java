@@ -9,5 +9,4 @@ public class OutstockApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OutstockApiApplication.class, args);
 	}
-
 }

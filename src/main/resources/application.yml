@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/ourstock"
+    username: ourstock
+    password: fa1865qr
+
+  jpa:
+    properties:
+      hibernate:
+        format-sql: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
