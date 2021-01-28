@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: "jdbc:postgresql://localhost:5432/ourstock"
-    username: ourstock
-    password: fa1865qr
+    url: jdbc:mysql://115.85.182.96:3306/appservice?characterEncoding=UTF-8&amp&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    data-password: RjfoThdnsdudWk2021
 
   jpa:
     properties:
@@ -11,3 +12,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+jwt:
+  header: Authorization
+  secret: LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS1NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXQ2R2pnSlRKVXp0ejdBVG0zK3ZZUEdubm90UTVoRlg1N09MMVVrTG9xVktyK3NmUzZEeENsOWY0LzJMODE4VExZYnRuMGg5R25VT2YvOFhKTFFwV3krQjZ1SzNYMHZWTUp5ellxSWFScmhVU3RaVFhVbnhPd1NDekVrMnNxN01UMmFrU3RBNFF3dHNKOWI2WWJrV3E0VHAwbWwwa1dZc3FJREVMbnphN1lKUmptRFIvQUZQYnFpRmRDQU5GcFV0dXEvaGVpVnV4OXZaYjg4MWRZVW1rY1l0QzN2b0gySitLWUFvQ21sak90ZzMzaW9lVkJMa3JoekdXLzd1MlhKK0VMVHJrN1pyWHJEeHBRbVlhTDNhb2pNdjYwQkZJK1dvWTR4RmpyVGFpMkQxZmFvMzJJNnNPY0lUeVk2Szc0SENvK0Z5eDZjYzZVaUpFTzViREdyZkZOUUlEQVFBQi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo=
+  token-validity-in-seconds: 86400
+
+logging:
+  level: com.outstock
