@@ -16,6 +16,9 @@ public class Example {
     @Column(length = 20, nullable = false)
     private String name;
 
+    @Column(length = 30, nullable = false)
+    private Integer phoneNumber;
+
     public Long getId() {
         return id;
     }
@@ -30,6 +33,14 @@ public class Example {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber() {
+        this.phoneNumber = phoneNumber;
     }
 
 }

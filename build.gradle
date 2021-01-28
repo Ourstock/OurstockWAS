@@ -23,12 +23,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 	implementation 'org.springframework.session:spring-session-core'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	// PostgreSQL
-	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.16'
+	// MySQLDB
+	runtimeOnly 'mysql:mysql-connector-java'
 
 	// Logging
 	compile group: 'org.bgee.log4jdbc-log4j2', name:'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+
+	// Jwt
+	compile group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
