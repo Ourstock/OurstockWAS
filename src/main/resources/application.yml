@@ -23,6 +23,7 @@ logging:
   level:
     "[org.hibernate]" : ERROR
 
+
 server:
-  address: 115.85.182.96
-  port: 8080
+  address: 0.1.0.1
+  port: 9000
