@@ -24,4 +24,5 @@ logging:
     "[org.hibernate]" : ERROR
 
 server:
-  port: 3022
+  port: 8090
+  address: 0.0.0.0
