@@ -25,5 +25,5 @@ logging:
 
 
 server:
-  port: 3022
+  port: 3023
 
