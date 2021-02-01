@@ -26,4 +26,5 @@ logging:
 
 server:
   port: 3023
+  address: 115.85.182.96
 
