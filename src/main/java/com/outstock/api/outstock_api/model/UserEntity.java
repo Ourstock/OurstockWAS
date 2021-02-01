@@ -13,7 +13,7 @@ import java.util.Date;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class UserEntity implements Serializable {
 
     @Id
