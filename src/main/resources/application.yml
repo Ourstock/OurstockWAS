@@ -2,16 +2,17 @@ spring:
   datasource:
     url: jdbc:mysql://115.85.182.96:3306/appservice?characterEncoding=UTF-8&amp&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    data-password: RjfoThdnsdudWk2021
+    username: apiuserk2021
+    password: dufTlagltkfwk2021
 
   jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.MySQL5Dialect
     properties:
       hibernate:
-        format-sql: true
-    show-sql: true
-    hibernate:
-      ddl-auto: update
+        format_sql: true
+        show_sql: true
 
 jwt:
   header: Authorization
@@ -19,4 +20,5 @@ jwt:
   token-validity-in-seconds: 86400
 
 logging:
-  level: com.outstock
+  level:
+    "[org.hibernate]" : ERROR
