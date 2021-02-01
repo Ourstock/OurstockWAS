@@ -24,6 +24,3 @@ logging:
     "[org.hibernate]" : ERROR
 
 
-server:
-  port: 3023
-
