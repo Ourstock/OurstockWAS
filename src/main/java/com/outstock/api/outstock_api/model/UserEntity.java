@@ -12,155 +12,129 @@ import java.io.Serializable;
 import java.util.Date;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
+@Getter
 @Entity
 @Table(name = "users")
 public class UserEntity implements Serializable {
 
     @Id
-    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", columnDefinition = "INT(11) UNSIGNED")
     private Long userId;
 
-    @Column(name = "call_number", length = 15)
-    @Getter
     @Setter
+    @Column(name = "call_number", length = 15)
     private String callNumber;
 
-    @Column(name = "telecom", length = 10)
-    @Getter
     @Setter
+    @Column(name = "telecom", length = 10)
     private String telecom;
 
-    @Column(name = "name", length = 10)
-    @Getter
     @Setter
-    private String username;
+    @Column(name = "name", length = 20)
+    private String name;
 
-    @Column(name = "jwt_token")
-    @Getter
     @Setter
-    private String jwtToken;
-
     @Column(name = "account_name", length = 10)
-    @Getter
-    @Setter
     private String accountName;
 
-    @Column(name = "account_number", length = 20)
-    @Getter
     @Setter
+    @Column(name = "account_number", length = 20)
     private String accountNumber;
 
-    @Column(name = "account_bank", length = 10)
-    @Getter
     @Setter
+    @Column(name = "account_bank", length = 10)
     private String accountBank;
 
-    @Column(name = "resident_registration_number_front", length = 6)
-    @Getter
     @Setter
+    @Column(name = "resident_registration_number_front", length = 6)
     private String residentRegistrationNumberFront;
 
-    @Column(name = "resident_registration_number_back", length = 7)
-    @Getter
     @Setter
+    @Column(name = "resident_registration_number_back", length = 7)
     private String residentRegistrationNumberBack;
 
-    @Column(name = "city_name", length = 15)
-    @Getter
     @Setter
+    @Column(name = "jwt_token")
+    private String jwtToken;
+
+    @Setter
+    @Column(name = "city_name", length = 15)
     private String cityName;
 
-    @Column(name = "district_name", length = 15)
-    @Getter
     @Setter
+    @Column(name = "district_name", length = 15)
     private String districtName;
 
-    @Column(name = "dong_name", length = 15)
-    @Getter
     @Setter
+    @Column(name = "dong_name", length = 15)
     private String dongName;
 
-    @Column(name = "road_name", length = 30)
     @Setter
-    @Getter
+    @Column(name = "road_name", length = 30)
     private String roadName;
 
-    @Column(name = "main_building_number", length = 10)
-    @Getter
     @Setter
+    @Column(name = "main_building_number", length = 10)
     private String mainBuildingNumber;
 
-    @Column(name = "sub_building_number", length = 10)
-    @Getter
     @Setter
+    @Column(name = "sub_building_number", length = 10)
     private String subBuildingNumber;
 
-    @Column(name = "building_name", length = 20)
-    @Getter
     @Setter
+    @Column(name = "building_name", length = 20)
     private String buildingName;
 
-    @Column(name = "additional_address", length = 30)
-    @Getter
     @Setter
+    @Column(name = "additional_address", length = 30)
     private String additionalAddress;
 
-
-    @Column(name = "post_code", length = 10)
-    @Getter
     @Setter
+    @Column(name = "post_code", length = 10)
     private String postCode;
 
-    @Column(name = "alarm")
-    @Getter
     @Setter
+    @Column(name = "alarm", columnDefinition = "TINYINT(1) UNSIGNED")
     private int alarm;
 
-    @Column(name = "marketing")
-    @Getter
     @Setter
+    @Column(name = "marketing", columnDefinition = "TINYINT(1) UNSIGNED")
     private int marketing;
 
-    @Column(name = "email_address")
-    @Getter
     @Setter
-    private String emailAddress;
-
-    @Column(name = "register_time", nullable = false, updatable = false)
+    @Column(name = "register_time", nullable = false, updatable = false)//
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date registerTime;
 
-    @Column(name = "last_connection")
-    @Getter
     @Setter
+    @Column(name = "last_connection")
     private Date lastConnection;
 
-    @Column(name = "os", length = 10)
-    @Getter
     @Setter
+    @Column(name = "os", length = 10)
     private String os;
 
-    @Column(name = "application_version", length = 10)
-    @Getter
     @Setter
+    @Column(name = "application_version", length = 10)
     private String applicationVersion;
 
-    @Column(name = "device_model", length = 25)
-    @Getter
     @Setter
+    @Column(name = "device_model", length = 25)
     private String deviceModel;
 
-    @Column(name = "invest_limit")
-    @Getter
     @Setter
-    private Integer investLimit;
+    @Column(name = "device_manufacturer", length = 15)
+    private String deviceManufacturer;
 
-    @Column(name = "deposit")
-    @Getter
     @Setter
-    private Integer deposit;
+    @Column(name = "invest_limit", columnDefinition = "INT(11) UNSIGNED")
+    private int invest_limit;
+
+    @Setter
+    @Column(name = "deposit", columnDefinition = "INT(11) UNSIGNED")
+    private int deposit;
 
 
     @Builder
