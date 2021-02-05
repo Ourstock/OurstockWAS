@@ -32,7 +32,7 @@ public class UserEntity implements Serializable {
 
     @Setter
     @Column(name = "name", length = 20)
-    private String name;
+    private String username;
 
     @Setter
     @Column(name = "account_name", length = 10)
@@ -130,7 +130,7 @@ public class UserEntity implements Serializable {
 
     @Setter
     @Column(name = "invest_limit", columnDefinition = "INT(11) UNSIGNED")
-    private int invest_limit;
+    private int investLimit;
 
     @Setter
     @Column(name = "deposit", columnDefinition = "INT(11) UNSIGNED")
@@ -138,7 +138,7 @@ public class UserEntity implements Serializable {
 
 
     @Builder
-    public UserEntity(String callNumber, String telecom, String username, String jwtToken, String accountName, String accountNumber, String accountBank, String residentRegistrationNumberFront, String residentRegistrationNumberBack, String cityName, String districtName, String dongName, String roadName, String mainBuildingNumber, String subBuildingNumber, String buildingName, String additionalAddress, String postCode, int alarm, int marketing, String emailAddress, Date registerTime, Date lastConnection, String os, String applicationVersion, String deviceModel, Integer investLimit, Integer deposit) {
+    public UserEntity(String callNumber, String telecom, String username, String jwtToken, String accountName, String accountNumber, String accountBank, String residentRegistrationNumberFront, String residentRegistrationNumberBack, String cityName, String districtName, String dongName, String roadName, String mainBuildingNumber, String subBuildingNumber, String buildingName, String additionalAddress, String postCode, int alarm, int marketing, Date registerTime, Date lastConnection, String os, String applicationVersion, String deviceModel, Integer investLimit, Integer deposit) {
         this.callNumber = callNumber;
         this.telecom = telecom;
         this.username = username;
@@ -159,7 +159,6 @@ public class UserEntity implements Serializable {
         this.postCode = postCode;
         this.alarm = alarm;
         this.marketing = marketing;
-        this.emailAddress = emailAddress;
         this.registerTime = registerTime;
         this.lastConnection = lastConnection;
         this.os = os;
