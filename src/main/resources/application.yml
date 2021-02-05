@@ -22,7 +22,3 @@ jwt:
 logging:
   level:
     "[org.hibernate]" : ERROR
-
-server:
-  port: 8090
-  address: 0.0.0.0
