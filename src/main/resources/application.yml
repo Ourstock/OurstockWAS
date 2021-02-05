@@ -24,4 +24,4 @@ logging:
     "[org.hibernate]" : ERROR
 
 server:
-  address: 115.85.182.96
+  port: 8020
