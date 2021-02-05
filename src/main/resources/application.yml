@@ -22,3 +22,6 @@ jwt:
 logging:
   level:
     "[org.hibernate]" : ERROR
+
+server:
+  address: 115.85.182.96
