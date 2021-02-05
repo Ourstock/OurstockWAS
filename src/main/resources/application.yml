@@ -25,3 +25,4 @@ logging:
 
 server:
   port: 8020
+  address: 115.85.182.96
