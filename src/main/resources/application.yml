@@ -29,4 +29,4 @@ server:
       protocol-header: x-forwarded-proto
     accesslog:
       enabled: true
-      pattern: %{X-Forwarded-For}i (, %h) %l %u %t &quot;%r&quot; %s %b
+      pattern: %{x-forwarded-for}i (, %h) %l %u %t &quot;%r&quot; %s %b
