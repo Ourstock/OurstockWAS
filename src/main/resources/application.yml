@@ -24,5 +24,10 @@ logging:
     "[org.hibernate]" : ERROR
 
 server:
-  port: 8020
-  address: 115.85.182.96
+  tomcat:
+    remoteip:
+      host-header: 115.85.182.96
+      port-header: 3022
+      protocol-header: http
+
+
