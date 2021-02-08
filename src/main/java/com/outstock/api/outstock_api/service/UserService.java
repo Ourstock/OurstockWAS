@@ -30,18 +30,18 @@ public class UserService {
     @Transactional
     public UserEntity signup(UserSignUpDto userSignUpDto) {
         if (userRepository.findOneByCallNumber(userSignUpDto.getCallNumber()).isPresent()) {
-            UserEntity userEntity = UserEntity.builder()
-                    .callNumber(userSignUpDto.getCallNumber())
-                    .telecom(userSignUpDto.getTelecom())
-                    .username(userSignUpDto.getUsername())
-                    .residentRegistrationNumberFront(userSignUpDto.getResidentRegistrationNumberFront())
-                    .residentRegistrationNumberBack(userSignUpDto.getResidentRegistrationNumberBack())
-                    .alarm(userSignUpDto.getAlarm())
-                    .marketing(userSignUpDto.getMarketing())
-                    .build();
-            return userRepository.save(userEntity);
+            throw new UserSignUpHandler();
         }
-        throw new UserSignUpHandler();
+        UserEntity userEntity = UserEntity.builder()
+                .callNumber(userSignUpDto.getCallNumber())
+                .telecom(userSignUpDto.getTelecom())
+                .username(userSignUpDto.getUsername())
+                .residentRegistrationNumberFront(userSignUpDto.getResidentRegistrationNumberFront())
+                .residentRegistrationNumberBack(userSignUpDto.getResidentRegistrationNumberBack())
+                .alarm(userSignUpDto.getAlarm())
+                .marketing(userSignUpDto.getMarketing())
+                .build();
+        return userRepository.save(userEntity);
     }
 //    로그인
     @Transactional
