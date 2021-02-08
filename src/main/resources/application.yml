@@ -22,10 +22,7 @@ jwt:
 logging:
   level:
     "[org.hibernate]" : ERROR
+
+
 server:
-  tomcat:
-    remoteip:
-      remote-ip-header: x-forwarded-for
-      protocol-header: x-forwarded-proto
-    accesslog:
-      enabled: true
+  port: 8030
