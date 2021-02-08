@@ -34,9 +34,9 @@ public class UserService {
         }
 
         UserEntity userEntity = UserEntity.builder()
-                .username(userSignUpDto.getUsername())
                 .callNumber(userSignUpDto.getCallNumber())
                 .telecom(userSignUpDto.getTelecom())
+                .username(userSignUpDto.getUsername())
                 .residentRegistrationNumberFront(userSignUpDto.getResidentRegistrationNumberFront())
                 .residentRegistrationNumberBack(userSignUpDto.getResidentRegistrationNumberBack())
                 .alarm(userSignUpDto.getAlarm())
