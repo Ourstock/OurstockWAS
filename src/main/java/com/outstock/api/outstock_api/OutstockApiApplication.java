@@ -12,25 +12,24 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @SpringBootApplication
-public class OutstockApiApplication implements ApplicationListener {
+public class OutstockApiApplication {
 
-	@Autowired
-	private ApplicationContext applicationContext;
-	public int portnum;
+//	@Autowired
+//	private ApplicationContext applicationContext;
+//	public int portnum;
 
 	public static void main(String[] args) {
 		SpringApplication.run(OutstockApiApplication.class, args);
 	}
 
-	@Override
-	public void onApplicationEvent(ApplicationEvent event) {
-		try{
-			String ip = InetAddress.getLocalHost().getHostAddress();
-			System.out.println(ip);
-			int port = applicationContext.getBean(Environment.class).getProperty("server.port", Integer.class, 8081);
-			portnum = port;
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-	}
+//	@Override
+//	public void onApplicationEvent(ApplicationEvent event) {
+//		try{
+//			String ip = InetAddress.getLocalHost().getHostAddress();
+//			int port = applicationContext.getBean(Environment.class).getProperty("server.port", Integer.class, 8081);
+//			portnum = port;
+//		} catch (UnknownHostException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

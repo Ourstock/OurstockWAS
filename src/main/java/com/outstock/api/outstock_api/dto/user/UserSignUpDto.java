@@ -34,7 +34,7 @@ public class UserSignUpDto {
         super();
     }
 
-    public UserSignUpDto(@NotNull String callNumber, @NotNull String telecom, @NotNull String name, @NotNull String residentRegistrationNumberFront, @NotNull String residentRegistrationNumberBack, @NotNull int alarm, @NotNull int marketing) {
+    public UserSignUpDto(@NotNull String callNumber, @NotNull String telecom, @NotNull String username, @NotNull String residentRegistrationNumberFront, @NotNull String residentRegistrationNumberBack, @NotNull int alarm, @NotNull int marketing) {
         this.callNumber = callNumber;
         this.telecom = telecom;
         this.username = username;
