@@ -136,18 +136,18 @@ public class UserEntity implements Serializable {
     @Column(name = "deposit", columnDefinition = "INT(11) UNSIGNED")
     private int deposit;
 
-
     @Builder
-    public UserEntity(String callNumber, String telecom, String username, String jwtToken, String accountName, String accountNumber, String accountBank, String residentRegistrationNumberFront, String residentRegistrationNumberBack, String cityName, String districtName, String dongName, String roadName, String mainBuildingNumber, String subBuildingNumber, String buildingName, String additionalAddress, String postCode, int alarm, int marketing, Date registerTime, Date lastConnection, String os, String applicationVersion, String deviceModel, Integer investLimit, Integer deposit) {
+    public UserEntity(Long userId, String callNumber, String telecom, String username, String accountName, String accountNumber, String accountBank, String residentRegistrationNumberFront, String residentRegistrationNumberBack, String jwtToken, String cityName, String districtName, String dongName, String roadName, String mainBuildingNumber, String subBuildingNumber, String buildingName, String additionalAddress, String postCode, int alarm, int marketing, Date registerTime, Date lastConnection, String os, String applicationVersion, String deviceModel, String deviceManufacturer, int investLimit, int deposit) {
+        this.userId = userId;
         this.callNumber = callNumber;
         this.telecom = telecom;
         this.username = username;
-        this.jwtToken = jwtToken;
         this.accountName = accountName;
         this.accountNumber = accountNumber;
         this.accountBank = accountBank;
         this.residentRegistrationNumberFront = residentRegistrationNumberFront;
         this.residentRegistrationNumberBack = residentRegistrationNumberBack;
+        this.jwtToken = jwtToken;
         this.cityName = cityName;
         this.districtName = districtName;
         this.dongName = dongName;
@@ -164,12 +164,12 @@ public class UserEntity implements Serializable {
         this.os = os;
         this.applicationVersion = applicationVersion;
         this.deviceModel = deviceModel;
+        this.deviceManufacturer = deviceManufacturer;
         this.investLimit = investLimit;
         this.deposit = deposit;
     }
 
-
-    public UserEntity() {}
+    protected UserEntity() { super(); }
 
 
 }

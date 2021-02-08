@@ -29,22 +29,20 @@ public class UserService {
 //    회원가입
     @Transactional
     public UserEntity signup(UserSignUpDto userSignUpDto) {
-        if (userRepository.findOneByCallNumber(userSignUpDto.getCallNumber()).orElse(null) != null) {
-            throw new UserSignUpHandler();
+        if (userRepository.findOneByCallNumber(userSignUpDto.getCallNumber()).isPresent()) {
+            UserEntity userEntity = UserEntity.builder()
+                    .callNumber(userSignUpDto.getCallNumber())
+                    .telecom(userSignUpDto.getTelecom())
+                    .username(userSignUpDto.getUsername())
+                    .residentRegistrationNumberFront(userSignUpDto.getResidentRegistrationNumberFront())
+                    .residentRegistrationNumberBack(userSignUpDto.getResidentRegistrationNumberBack())
+                    .alarm(userSignUpDto.getAlarm())
+                    .marketing(userSignUpDto.getMarketing())
+                    .build();
+            return userRepository.save(userEntity);
         }
-
-        UserEntity userEntity = UserEntity.builder()
-                .callNumber(userSignUpDto.getCallNumber())
-                .telecom(userSignUpDto.getTelecom())
-                .username(userSignUpDto.getUsername())
-                .residentRegistrationNumberFront(userSignUpDto.getResidentRegistrationNumberFront())
-                .residentRegistrationNumberBack(userSignUpDto.getResidentRegistrationNumberBack())
-                .alarm(userSignUpDto.getAlarm())
-                .marketing(userSignUpDto.getMarketing())
-                .build();
-        return userRepository.save(userEntity);
+        throw new UserSignUpHandler();
     }
-
 //    로그인
     @Transactional
     public UserEntity login(UserLoginDto userLoginDto) {
