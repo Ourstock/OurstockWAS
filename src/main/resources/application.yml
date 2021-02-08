@@ -13,6 +13,9 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+  mvc:
+    servlet:
+      path:
 
 jwt:
   header: Authorization
@@ -26,3 +29,4 @@ logging:
 
 server:
   port: 9090
+
