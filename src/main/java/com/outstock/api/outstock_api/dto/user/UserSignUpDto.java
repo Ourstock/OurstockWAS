@@ -13,37 +13,36 @@ public class UserSignUpDto {
     private String callNumber;
 
     @NotNull
+    private String telecom;
+
+    @NotNull
     private String username;
 
-    private String telecom;
-    private String cityName;
-    private String districtName;
-    private String dongName;
-    private String roadName;
-    private String mainBuildingNumber;
-    private String subBuildingNumber;
-    private String buildingName;
-    private String addtionalAddress;
-    private String postCode;
-    private Integer alarm;
-    private Integer marketing;
+    @NotNull
+    private String residentRegistrationNumberFront;
 
+    @NotNull
+    private String residentRegistrationNumberBack;
 
-    @Builder
-    public UserSignUpDto(@NotNull String callNumber, @NotNull String username, String telecom, String cityName, String districtName, String dongName, String roadName, String mainBuildingNumber, String subBuildingNumber, String buildingName, String addtionalAddress, String postCode, Integer alarm, Integer marketing) {
+    @NotNull
+    private int alarm;
+
+    @NotNull
+    private int marketing;
+
+    protected UserSignUpDto() {
+        super();
+    }
+
+    public UserSignUpDto(@NotNull String callNumber, @NotNull String telecom, @NotNull String name, @NotNull String residentRegistrationNumberFront, @NotNull String residentRegistrationNumberBack, @NotNull int alarm, @NotNull int marketing) {
         this.callNumber = callNumber;
-        this.username = username;
         this.telecom = telecom;
-        this.cityName = cityName;
-        this.districtName = districtName;
-        this.dongName = dongName;
-        this.roadName = roadName;
-        this.mainBuildingNumber = mainBuildingNumber;
-        this.subBuildingNumber = subBuildingNumber;
-        this.buildingName = buildingName;
-        this.addtionalAddress = addtionalAddress;
-        this.postCode = postCode;
+        this.username = username;
+        this.residentRegistrationNumberFront = residentRegistrationNumberFront;
+        this.residentRegistrationNumberBack = residentRegistrationNumberBack;
         this.alarm = alarm;
         this.marketing = marketing;
     }
+
+
 }
