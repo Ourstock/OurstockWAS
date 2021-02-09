@@ -9,13 +9,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Getter
 @Entity
-@Table(name = "users")
-public class UserEntity implements Serializable {
+@Table(name = "userss")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -103,13 +104,14 @@ public class UserEntity implements Serializable {
     private int marketing;
 
     @Setter
-    @Column(name = "register_time", nullable = false, updatable = false)//
+    @Column(name = "register_time", nullable = false, updatable = false, columnDefinition = "timestamp")//
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date registerTime;
 
     @Setter
     @Column(name = "last_connection")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastConnection;
 
     @Setter
