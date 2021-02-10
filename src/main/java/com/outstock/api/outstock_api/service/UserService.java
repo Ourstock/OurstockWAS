@@ -3,6 +3,7 @@ package com.outstock.api.outstock_api.service;
 
 import com.outstock.api.outstock_api.dto.user.UserFcmTokenDto;
 import com.outstock.api.outstock_api.dto.user.UserLoginDto;
+import com.outstock.api.outstock_api.dto.user.UserSetAlarmDto;
 import com.outstock.api.outstock_api.dto.user.UserSignUpDto;
 import com.outstock.api.outstock_api.handler.user.JwtTokenHandler;
 import com.outstock.api.outstock_api.handler.user.UserLoginHandler;
@@ -13,8 +14,15 @@ import com.outstock.api.outstock_api.model.Fcm;
 import com.outstock.api.outstock_api.model.UserEntity;
 import com.outstock.api.outstock_api.repository.FcmRepository;
 import com.outstock.api.outstock_api.repository.UserRepository;
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 
 @Service
@@ -46,9 +54,18 @@ public class UserService {
                 .username(userSignUpDto.getUsername())
                 .residentRegistrationNumberFront(userSignUpDto.getResidentRegistrationNumberFront())
                 .residentRegistrationNumberBack(userSignUpDto.getResidentRegistrationNumberBack())
-                .alarm(userSignUpDto.getAlarm())
-                .marketing(userSignUpDto.getMarketing())
                 .build();
+        return userRepository.save(userEntity);
+    }
+
+    @Transactional
+    public UserEntity setAalarm(UserSetAlarmDto userSetAlarmDto) {
+        if (userRepository.findById(userSetAlarmDto.getUserId()).isEmpty()) {
+            throw new UserNotFoundHandler();
+        }
+        UserEntity userEntity = userRepository.getOne(userSetAlarmDto.getUserId());
+        userEntity.setAlarm(userSetAlarmDto.getAlarm());
+        userEntity.setMarketing(userSetAlarmDto.getMarketing());
         return userRepository.save(userEntity);
     }
 
@@ -60,7 +77,9 @@ public class UserService {
         }
         UserEntity userEntity = userRepository.findByCallNumber(userLoginDto.getCallNumber());
         String token = jwtToken.createToken(userLoginDto.getCallNumber());
+        Date now = new Date();
         userEntity.setJwtToken(token);
+        userEntity.setLastConnection(now);
         return userRepository.save(userEntity);
     }
 
