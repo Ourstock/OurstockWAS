@@ -3,6 +3,7 @@ package com.outstock.api.outstock_api.controller;
 
 import com.outstock.api.outstock_api.dto.user.UserFcmTokenDto;
 import com.outstock.api.outstock_api.dto.user.UserLoginDto;
+import com.outstock.api.outstock_api.dto.user.UserSetAlarmDto;
 import com.outstock.api.outstock_api.dto.user.UserSignUpDto;
 import com.outstock.api.outstock_api.model.Fcm;
 import com.outstock.api.outstock_api.model.UserEntity;
@@ -31,6 +32,14 @@ public class UserController {
             @Valid @RequestBody UserSignUpDto userSignUpDto
     ) {
         return ResponseEntity.ok(userService.signup(userSignUpDto));
+    }
+
+//    유저 알람 세팅
+    @PostMapping("/user/alarm")
+    public ResponseEntity<UserEntity> setUserAlarm(
+            @Valid @RequestBody UserSetAlarmDto userSetAlarmDto
+    ) {
+        return ResponseEntity.ok(userService.setAalarm(userSetAlarmDto));
     }
 
 //    로그인
