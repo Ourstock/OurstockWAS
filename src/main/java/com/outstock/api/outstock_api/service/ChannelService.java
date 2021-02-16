@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Service
@@ -90,5 +91,19 @@ public class ChannelService {
         throw new SystemHandler();
     }
 
+    @Transactional
+    public boolean validChannelId(String channelId) {
+        return channelRepository.findById(channelId).isPresent();
+    }
+
+    @Transactional
+    public ArrayList<Channel> allChannelInformation() {
+        return new ArrayList<Channel>(channelRepository.findAll());
+    }
+
+    @Transactional
+    public ArrayList<Channel> searchChannelInformation(long subscriberCount) {
+        return new ArrayList<Channel>(channelRepository.findAllBySubscriberCount(subscriberCount));
+    }
 
 }
