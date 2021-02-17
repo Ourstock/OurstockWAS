@@ -2,6 +2,7 @@ package com.outstock.api.outstock_api.service;
 
 
 import com.outstock.api.outstock_api.dto.channel.ChannelRegisterDto;
+import com.outstock.api.outstock_api.dto.channel.ChannelSearchNameDto;
 import com.outstock.api.outstock_api.dto.channel.ChannelUpdateDto;
 import com.outstock.api.outstock_api.handler.channel.ChannelExistHandler;
 import com.outstock.api.outstock_api.handler.channel.ChannelNotFoundHandler;
@@ -74,14 +75,14 @@ public class ChannelService {
                 if (channelUpdateDto.getStatus() == 1) {
                     channel.setListingTime(now);
                 } else if (channelUpdateDto.getStatus() == 2) {
-                    channel.setOnstockTime(now);
-                } else if (channelUpdateDto.getStatus() == 3) {
                     channel.setOfferingTimeStart(now);
-                } else if (channelUpdateDto.getStatus() == 4) {
+                } else if (channelUpdateDto.getStatus() == 3) {
                     channel.setOfferingTimeEnd(now);
-                } else if (channelUpdateDto.getStatus() == 5) {
-                    channel.setTradingStopTime(now);
+                } else if (channelUpdateDto.getStatus() == 4) {
+                    channel.setOnstockTime(now);
                 } else if (channelUpdateDto.getStatus() == 6) {
+                    channel.setTradingStopTime(now);
+                } else if (channelUpdateDto.getStatus() == 7) {
                     channel.setDelistingTime(now);
                 }
                 return channelRepository.save(channel);
@@ -90,6 +91,16 @@ public class ChannelService {
         }
         throw new SystemHandler();
     }
+//    status = 1 listingtime
+//    status = 2 offeringtime start
+//    status = 3 offeringtime end
+//    status = 4 onstock
+//    status = 5 투자주의
+//    status = 6 tradingstoptime
+//    status = 7 delistingtime
+//    status = 8 노출 비활성
+
+
 
     @Transactional
     public boolean validChannelId(String channelId) {
@@ -102,8 +113,13 @@ public class ChannelService {
     }
 
     @Transactional
-    public ArrayList<Channel> searchChannelInformation(long subscriberCount) {
-        return new ArrayList<Channel>(channelRepository.findAllBySubscriberCount(subscriberCount));
+    public ArrayList<Channel> searchChannelInformation(ChannelSearchNameDto channelSearchNameDto) {
+        return new ArrayList<Channel>(channelRepository.findAllBySearchChannelName(
+                0,
+                8,
+                channelSearchNameDto.getChannelName(),
+                channelSearchNameDto.getChannelName())
+        );
     }
 
 }
