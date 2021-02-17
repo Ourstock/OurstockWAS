@@ -24,6 +24,7 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 	implementation 'org.springframework.session:spring-session-core'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 	// MySQLDB
 	runtimeOnly 'mysql:mysql-connector-java'
