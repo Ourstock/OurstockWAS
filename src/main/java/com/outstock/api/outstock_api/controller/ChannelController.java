@@ -1,6 +1,7 @@
 package com.outstock.api.outstock_api.controller;
 
 import com.outstock.api.outstock_api.dto.channel.ChannelRegisterDto;
+import com.outstock.api.outstock_api.dto.channel.ChannelSearchNameDto;
 import com.outstock.api.outstock_api.dto.channel.ChannelUpdateDto;
 import com.outstock.api.outstock_api.model.Channel;
 import com.outstock.api.outstock_api.service.ChannelService;
@@ -53,6 +54,13 @@ public class ChannelController {
     @GetMapping("/all/channel")
     public ArrayList<Channel> getAllChannel() {
         return channelService.allChannelInformation();
+    }
+
+
+//    채널 검색 (이름기준)
+    @GetMapping("/search/channel/name")
+    public ArrayList<Channel> getNameChannel(@Valid @RequestBody ChannelSearchNameDto channelSearchNameDto) {
+        return channelService.searchChannelInformation(channelSearchNameDto);
     }
 
 }
