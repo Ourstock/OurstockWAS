@@ -3,7 +3,9 @@ package com.outstock.api.outstock_api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
 @Entity
 @Table(name = "order_historys")
@@ -32,9 +35,11 @@ public class Order {
     private int orderCount;
 
     @Column(name = "trade_count", columnDefinition = "int(10) unsigned")
+    @ColumnDefault("0")
     private int tradeCount;
 
     @Column(name = "rest_count", columnDefinition = "int(10) unsigned")
+    @ColumnDefault("0")
     private int restCount;
 
     @Column(name = "order_cost", columnDefinition = "int(10) unsigned")
@@ -44,6 +49,7 @@ public class Order {
     private String type;
 
     @Column(name = "status", columnDefinition = "varchar(6)")  // stay   / cancel
+    @ColumnDefault("'stay'")
     private String status;
 
     @Column(name = "register_time", nullable = false, updatable = false)//

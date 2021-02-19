@@ -3,6 +3,7 @@ package com.outstock.api.outstock_api.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -37,6 +38,7 @@ public class Trade {
     private String channelId;
 
     @Column(name = "trade_count", columnDefinition = "int(10) unsigned")
+    @ColumnDefault("0")
     private int tradeCount;
 
     @Column(name = "trade_cost", columnDefinition = "int(10) unsigned")

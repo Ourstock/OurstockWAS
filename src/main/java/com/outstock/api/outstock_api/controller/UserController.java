@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -81,5 +82,12 @@ public class UserController {
     ) {
         String jwtToken = httpServletRequest.getHeader("JwtAccessToken");
         return ResponseEntity.ok(userService.saveUserFcmToken(userFcmTokenDto, jwtToken));
+    }
+
+    @PostMapping("/user/delete/{userId}")
+    public ResponseEntity<UserEntity> deleteUser(
+            @PathVariable long userId
+    ) {
+        return userService.userDelete(userId);
     }
 }
