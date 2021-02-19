@@ -1,17 +1,17 @@
-#spring:
-#  datasource:
-#    url: jdbc:mysql://115.85.182.96:33906/appservice?characterEncoding=UTF-8&amp&serverTimezone=Asia/Seoul
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username: apiuserk21
-#    password: dufTlagltkfwk2021
-
-
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/ourstock?characterEncoding=UTF-8&amp&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://115.85.182.96:33906/appservice?characterEncoding=UTF-8&amp&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password:
+    username: apiuserk21
+    password: dufTlagltkfwk2021
+
+
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/ourstock?characterEncoding=UTF-8&amp&serverTimezone=Asia/Seoul
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password:
 
   jpa:
     hibernate:
@@ -22,8 +22,8 @@ spring:
         format_sql: true
         show_sql: true
 
-server:
-  port: 9010
+#server:
+#  port: 9010
 
 jwt:
   header: Authorization
@@ -35,8 +35,8 @@ logging:
     "[org.hibernate]" : ERROR
 
 
-#server:
-#  port: 9090
+server:
+  port: 9090
 
 
 
