@@ -13,6 +13,12 @@ spring:
 #    username: root
 #    password:
 
+    hikari:
+      connection-timeout: 10000
+      validation-timeout: 10000
+      idle-timeout: 10000
+      max-lifetime: 580000
+
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -22,8 +28,8 @@ spring:
         format_sql: true
 #        show_sql: true
 
-#server:
-#  port: 9010
+server:
+  port: 9010
 
 jwt:
   header: Authorization
@@ -35,8 +41,8 @@ logging:
     "[org.hibernate]" : ERROR
 
 
-server:
-  port: 9090
+#server:
+#  port: 9090
 
 
 systempassword: 2021tjdrhdgkqtlek
