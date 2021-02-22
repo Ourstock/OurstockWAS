@@ -1,5 +1,6 @@
 package com.ourstock.api.ourstock_api.service;
 
+import com.ourstock.api.ourstock_api.dto.order.OrderUpdateDto;
 import com.ourstock.api.ourstock_api.repository.TradeRepository;
 import com.ourstock.api.ourstock_api.dto.order.OrderDeleteDto;
 import com.ourstock.api.ourstock_api.dto.order.OrderRegisterDto;
@@ -35,10 +36,22 @@ public class OrderService {
     }
 
 //    @Transactional
-//    public Order updateSellOrder(OrderRegisterDto orderRegisterDto, String jwtToken) {
-//        if (userService.validJwtToken(orderRegisterDto.getUserId(), jwtToken)) {
-//            if (channelService.validChannelId(orderRegisterDto.getChannelId())) {
-//                Order oldOrder = orderRepository.getOne()
+//    public Order updateSellOrder(OrderUpdateDto orderUpdateDto, String jwtToken) {
+//        if (userService.validJwtToken(orderUpdateDto.getUserId(), jwtToken)) {
+//            if (channelService.validChannelId(orderUpdateDto.getChannelId())) {
+//                if (orderRepository.findById(orderUpdateDto.getOrderId()).isPresent()) {
+//                    Order updateOrder = orderRepository.getOne(orderUpdateDto.getOrderId());
+//                    if (orderRepository.findFirstByOrderCostAndOrderCountAndRestCountAndTypeOrderByRegisterTimeAsc(
+//                            orderUpdateDto.getOrderCost(),
+//                            orderUpdateDto.getOrderCount(),
+//                            orderUpdateDto.getOrderCount(),
+//                            "buy").isPresent()) {
+//
+//                    }
+//
+//
+//                }
+//
 //            }
 //        }
 //    }
