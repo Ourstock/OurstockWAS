@@ -74,8 +74,7 @@ public class UserController {
 //    Fcm토큰 저장
     @ApiOperation(value = "Fcm토큰 저장")
     @ApiResponses(value = {
-            @ApiResponse(code = 401, message = "Unauthorized", response = ExpiredJwtException.class),
-            @ApiResponse(code = 401, message = "Unauthorized", response = MalformedJwtException.class),
+            @ApiResponse(code = 401, message = "Unauthorized", response = JwtTokenException.class),
             @ApiResponse(code = 404, message = "Not Exist User", response = UserNotFoundException.class)
     })
     @PostMapping("/user/fcm")
