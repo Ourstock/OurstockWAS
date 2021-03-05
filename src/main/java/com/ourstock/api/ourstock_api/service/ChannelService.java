@@ -2,11 +2,11 @@ package com.ourstock.api.ourstock_api.service;
 
 
 import com.ourstock.api.ourstock_api.dto.channel.ChannelUpdateDto;
-import com.ourstock.api.ourstock_api.handler.channel.ChannelNotFoundHandler;
-import com.ourstock.api.ourstock_api.handler.system.SystemHandler;
+import com.ourstock.api.ourstock_api.handler.channel.ChannelNotFoundException;
+import com.ourstock.api.ourstock_api.handler.system.SystemException;
 import com.ourstock.api.ourstock_api.dto.channel.ChannelRegisterDto;
 import com.ourstock.api.ourstock_api.dto.channel.ChannelSearchNameDto;
-import com.ourstock.api.ourstock_api.handler.channel.ChannelExistHandler;
+import com.ourstock.api.ourstock_api.handler.channel.ChannelExistException;
 import com.ourstock.api.ourstock_api.model.Channel;
 import com.ourstock.api.ourstock_api.repository.ChannelRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,9 +50,9 @@ public class ChannelService {
                         .build();
                 return channelRepository.save(channel);
             }
-            throw new ChannelExistHandler();
+            throw new ChannelExistException();
         }
-        throw new SystemHandler();
+        throw new SystemException();
     }
 
     @Transactional
@@ -87,9 +87,9 @@ public class ChannelService {
                 }
                 return channelRepository.save(channel);
             }
-            throw new ChannelNotFoundHandler();
+            throw new ChannelNotFoundException();
         }
-        throw new SystemHandler();
+        throw new SystemException();
     }
 //    status = 1 listingtime
 //    status = 2 offeringtime start

@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 
 @AllArgsConstructor
@@ -26,13 +27,13 @@ public class Trade {
     private long buyOrderId;
 
     @Column(name = "buy_user_id", columnDefinition = "int(10) unsigned")
-    private long buyUserId;
+    private UUID buyUserId;
 
     @Column(name = "sell_order_id", columnDefinition = "int(10) unsigned")
     private long sellOrderId;
 
     @Column(name = "sell_user_id", columnDefinition = "int(10) unsigned")
-    private long sellUserId;
+    private UUID sellUserId;
 
     @Column(name = "channel_id", columnDefinition = "char(6)")
     private String channelId;

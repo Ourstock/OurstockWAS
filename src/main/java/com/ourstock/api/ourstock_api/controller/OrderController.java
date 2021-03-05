@@ -1,16 +1,13 @@
 package com.ourstock.api.ourstock_api.controller;
 
 
+import com.ourstock.api.ourstock_api.dto.order.*;
 import com.ourstock.api.ourstock_api.service.OrderService;
-import com.ourstock.api.ourstock_api.dto.order.OrderDeleteDto;
-import com.ourstock.api.ourstock_api.dto.order.OrderListDto;
-import com.ourstock.api.ourstock_api.dto.order.OrderRegisterDto;
 import com.ourstock.api.ourstock_api.model.Order;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -25,31 +22,46 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-//   매도
-    //    거래 등록
-    @PostMapping("/order/sell/register")
-    public ResponseEntity<Order> registerSellOrder(
-            @Valid @RequestBody OrderRegisterDto orderRegisterDto,
-            HttpServletRequest httpServletRequest
+
+//    @MessageMapping("/order/receive")
+//    @SendTo("/transactions")
+//    public ResponseEntity<Order> sendToTransaction(
+//            @Valid @RequestBody OrderRegisterDto orderRegisterDto,
+//            HttpServletRequest httpServletRequest
+//    ) {
+//        return ResponseEntity.ok(
+//                orderService.createOrder(orderRegisterDto,
+//                        httpServletRequest.getHeader("JwtAccessToken"))
+//        );
+//    }
+
+
+    @PostMapping("/order/register")
+    public ResponseEntity<Order> registerBuyOrder(
+            @Valid @RequestBody OrderRegisterDto orderRegisterDto
     ) {
         return ResponseEntity.ok(
-                orderService.createSellOrder(orderRegisterDto,
-                        httpServletRequest.getHeader("JwtAccessToken")
-                )
+                orderService.createOrder(orderRegisterDto)
         );
     }
 
-//  매수
-    @PostMapping("/order/buy/register")
-    public ResponseEntity<Order> registerBuyOrder(
-            @Valid @RequestBody OrderRegisterDto orderRegisterDto,
+    @GetMapping("/order/detail")
+    public ResponseEntity<Order> detailOrder(
+            @Valid @RequestBody OrderDetailDto orderDetailDto,
             HttpServletRequest httpServletRequest
     ) {
-        return ResponseEntity.ok(
-                orderService.createBuyOrder(orderRegisterDto,
-                        httpServletRequest.getHeader("JwtAccessToken"))
-        );
+        return ResponseEntity.ok(orderService.detailOrder(orderDetailDto, httpServletRequest.getHeader("JwtAccessToken")));
     }
+
+    @PostMapping("/order/sell/update")
+    public ResponseEntity<Order> updateOrder(
+            @Valid @RequestBody OrderUpdateDto orderUpdateDto,
+            HttpServletRequest httpServletRequest
+    ) {
+        return ResponseEntity.ok(orderService.updateOrder(orderUpdateDto, httpServletRequest.getHeader("JwtAccessToken")));
+    }
+
+
 
 
     //    거래 삭제

@@ -5,12 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.UUID;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Getter
@@ -19,9 +21,10 @@ import java.util.Date;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", columnDefinition = "INT(11) UNSIGNED")
-    private Long userId;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "user_id", columnDefinition = "BINARY(16)")
+    private UUID userId;
 
     @Setter
     @Column(name = "call_number", length = 15)
@@ -58,6 +61,10 @@ public class UserEntity {
     @Setter
     @Column(name = "jwt_token")
     private String jwtToken;
+
+    @Setter
+    @Column(name = "refresh_jwt_token")
+    private String jwtRefreshToken;
 
     @Setter
     @Column(name = "city_name", length = 15)
@@ -139,7 +146,7 @@ public class UserEntity {
     private int deposit;
 
     @Builder
-    public UserEntity(Long userId, String callNumber, String telecom, String username, String accountName, String accountNumber, String accountBank, String residentRegistrationNumberFront, String residentRegistrationNumberBack, String jwtToken, String cityName, String districtName, String dongName, String roadName, String mainBuildingNumber, String subBuildingNumber, String buildingName, String additionalAddress, String postCode, int alarm, int marketing, Date registerTime, Date lastConnection, String os, String applicationVersion, String deviceModel, String deviceManufacturer, int investLimit, int deposit) {
+    public UserEntity(UUID userId, String callNumber, String telecom, String username, String accountName, String accountNumber, String accountBank, String residentRegistrationNumberFront, String residentRegistrationNumberBack, String jwtToken, String cityName, String districtName, String dongName, String roadName, String mainBuildingNumber, String subBuildingNumber, String buildingName, String additionalAddress, String postCode, int alarm, int marketing, Date registerTime, Date lastConnection, String os, String applicationVersion, String deviceModel, String deviceManufacturer, int investLimit, int deposit) {
         this.userId = userId;
         this.callNumber = callNumber;
         this.telecom = telecom;
