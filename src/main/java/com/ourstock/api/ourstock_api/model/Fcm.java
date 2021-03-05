@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.UUID;
 
 
 @AllArgsConstructor
@@ -23,8 +24,8 @@ public class Fcm implements Serializable {
     private Long fcmId;
 
     @Setter
-    @Column(name = "user_id", columnDefinition = "INT(10) UNSIGNED")
-    private Long userId;
+    @Column(name = "user_id", columnDefinition = "BINARY(16)")
+    private UUID userId;
 
     @Setter
     @Column(name = "fcm_token", columnDefinition = "varchar(255)")

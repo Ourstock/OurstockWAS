@@ -1,25 +1,21 @@
 package com.ourstock.api.ourstock_api.service;
 
 
-import com.ourstock.api.ourstock_api.dto.user.UserFcmTokenDto;
-import com.ourstock.api.ourstock_api.dto.user.UserLoginDto;
-import com.ourstock.api.ourstock_api.dto.user.UserSetAlarmDto;
-import com.ourstock.api.ourstock_api.dto.user.UserSignUpDto;
-import com.ourstock.api.ourstock_api.handler.user.JwtTokenHandler;
-import com.ourstock.api.ourstock_api.handler.user.UserLoginHandler;
-import com.ourstock.api.ourstock_api.handler.user.UserSignUpHandler;
+import com.ourstock.api.ourstock_api.dto.user.*;
+import com.ourstock.api.ourstock_api.handler.user.JwtTokenException;
+import com.ourstock.api.ourstock_api.handler.user.UserLoginException;
+import com.ourstock.api.ourstock_api.handler.user.UserSignUpException;
 import com.ourstock.api.ourstock_api.model.Fcm;
 import com.ourstock.api.ourstock_api.model.UserEntity;
 import com.ourstock.api.ourstock_api.repository.FcmRepository;
 import com.ourstock.api.ourstock_api.repository.UserRepository;
-import com.ourstock.api.ourstock_api.dto.user.*;
-import com.ourstock.api.ourstock_api.handler.user.UserNotFoundHandler;
-import com.ourstock.api.ourstock_api.jwt.JwtToken;
-import org.springframework.http.ResponseEntity;
+import com.ourstock.api.ourstock_api.handler.user.UserNotFoundException;
+import com.ourstock.api.ourstock_api.jwt.JwtTokenProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.UUID;
 
 
 @Service
@@ -27,82 +23,103 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final FcmRepository fcmRepository;
-    private final JwtToken jwtToken;
+    private final JwtTokenProvider jwtTokenProvider;
+
 
     public UserService(
             UserRepository userRepository,
             FcmRepository fcmRepository,
-            JwtToken jwtToken
+            JwtTokenProvider jwtTokenProvider
     ) {
         this.userRepository = userRepository;
         this.fcmRepository = fcmRepository;
-        this.jwtToken = jwtToken;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
 //    회원가입
     @Transactional
-    public UserEntity signup(UserSignUpDto userSignUpDto) {
+    public UserJwtTokenDto signup(UserSignUpDto userSignUpDto) {
         if (userRepository.findOneByCallNumber(userSignUpDto.getCallNumber()).isPresent()) {
-            throw new UserSignUpHandler();
+            throw new UserSignUpException();
         }
+
         UserEntity userEntity = UserEntity.builder()
                 .callNumber(userSignUpDto.getCallNumber())
                 .telecom(userSignUpDto.getTelecom())
                 .username(userSignUpDto.getUsername())
                 .residentRegistrationNumberFront(userSignUpDto.getResidentRegistrationNumberFront())
                 .residentRegistrationNumberBack(userSignUpDto.getResidentRegistrationNumberBack())
+                .alarm(userSignUpDto.getAlarm())
                 .build();
-        return userRepository.save(userEntity);
+
+        return getUserJwtTokenDto(userEntity);
     }
 
     @Transactional
-    public UserEntity setAalarm(UserSetAlarmDto userSetAlarmDto) {
-        if (userRepository.findById(userSetAlarmDto.getUserId()).isEmpty()) {
-            throw new UserNotFoundHandler();
+    public UserJwtTokenDto userRefreshToken(UserRefreshToken userRefreshToken) {
+        UUID userId = userRefreshToken.getUserId();
+        if (userRepository.findByUserIdAndJwtRefreshToken(userId, userRefreshToken.getJwtRefreshToken()).isPresent()) {
+            UserEntity userEntity = userRepository.getByUserId(userId);
+            return getUserJwtTokenDto(userEntity);
         }
-        UserEntity userEntity = userRepository.getOne(userSetAlarmDto.getUserId());
-        userEntity.setAlarm(userSetAlarmDto.getAlarm());
-        userEntity.setMarketing(userSetAlarmDto.getMarketing());
-        return userRepository.save(userEntity);
+        throw new UserNotFoundException();
     }
 
-//    로그인
+    private UserJwtTokenDto getUserJwtTokenDto(UserEntity userEntity) {
+        String token = jwtTokenProvider.generateToken(userEntity);
+        String refreshToken = jwtTokenProvider.generateRefreshToken(userEntity);
+        userEntity.setJwtToken(token);
+        userEntity.setJwtRefreshToken(refreshToken);
+        userRepository.save(userEntity);
+        return UserJwtTokenDto.builder()
+                .userId(userEntity.getUserId())
+                .jwtToken(token)
+                .jwtRefreshToken(refreshToken)
+                .build();
+    }
+
+
+    //    로그인
     @Transactional
-    public UserEntity login(UserLoginDto userLoginDto) {
+    public UserLoginReturnDto login(UserLoginDto userLoginDto) {
         if (userRepository.findOneByCallNumber(userLoginDto.getCallNumber()).isEmpty()) {
-            throw new UserLoginHandler();
+            throw new UserLoginException();
         }
         UserEntity userEntity = userRepository.findByCallNumber(userLoginDto.getCallNumber());
-        String token = jwtToken.createToken(userLoginDto.getCallNumber());
+
         Date now = new Date();
-        userEntity.setJwtToken(token);
         userEntity.setLastConnection(now);
-        return userRepository.save(userEntity);
+        userRepository.save(userEntity);
+
+        return UserLoginReturnDto.builder()
+                .userId(userEntity.getUserId())
+                .jwtToken(userEntity.getJwtToken())
+                .jwtRefreshToken(userEntity.getJwtRefreshToken())
+                .isSuccessLogin(true)
+                .build();
     }
 
     @Transactional
-    public boolean validJwtToken(long userId, String jwtToken) {
-        return userRepository.getOne(userId).getJwtToken().equals(jwtToken);
-    }
-
-    @Transactional
-    public Fcm saveUserFcmToken(UserFcmTokenDto userFcmTokenDto, String jwtToken) {
-        if (userRepository.findById(userFcmTokenDto.getUserId()).isPresent()) {
-            if (validJwtToken(userFcmTokenDto.getUserId(),jwtToken)) {
+    public UserFcmTokenDto saveUserFcmToken(UserFcmTokenDto userFcmTokenDto, String jwtToken) {
+        if (jwtTokenProvider.isTokenExpired(jwtToken)) {  // 토큰의 만료 검사
+            if (userRepository.findByUserIdAndJwtToken(userFcmTokenDto.getUserId(), jwtToken).isPresent()) {
                 Fcm fcm = Fcm.builder()
                         .fcmToken(userFcmTokenDto.getFcmToken())
                         .userId(userFcmTokenDto.getUserId())
+                        .lastChecktime(new Date())
                         .build();
-                return fcmRepository.save(fcm);
+                fcmRepository.save(fcm);
+                userFcmTokenDto.setLastCheckTime(new Date());
+                return userFcmTokenDto;
             }
-            throw new JwtTokenHandler();
+            throw new UserNotFoundException();
         }
-        throw new UserNotFoundHandler();
+        throw new JwtTokenException();
     }
-
-    @Transactional
-    public ResponseEntity<UserEntity> userDelete(long userId) {
-        userRepository.deleteById(userId);
-        return null;
-    }
+//
+//    @Transactional
+//    public ResponseEntity<UserEntity> userDelete(long userId) {
+//        userRepository.deleteById(userId);
+//        return null;
+//    }
 }

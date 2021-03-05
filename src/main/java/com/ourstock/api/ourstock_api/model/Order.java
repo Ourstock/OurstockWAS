@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 
 @AllArgsConstructor
@@ -23,8 +24,8 @@ public class Order {
     @Column(name = "order_id", columnDefinition = "int(10) unsigned")
     private Long orderId;
 
-    @Column(name = "user_id", columnDefinition = "int(10) unsigned")
-    private long userId;
+    @Column(name = "user_id", columnDefinition = "BINARY(16)")
+    private UUID userId;
 
     @Column(name = "channel_id", columnDefinition = "char(6)")
     private String channelId;

@@ -24,16 +24,21 @@ public class UserSignUpDto {
     @NotNull
     private String residentRegistrationNumberBack;
 
+    @NotNull
+    private int alarm;
+
     protected UserSignUpDto() {
         super();
     }
 
-    public UserSignUpDto(@NotNull String callNumber, @NotNull String telecom, @NotNull String username, @NotNull String residentRegistrationNumberFront, @NotNull String residentRegistrationNumberBack) {
+    public UserSignUpDto(@NotNull String callNumber, @NotNull String telecom, @NotNull String username, @NotNull String residentRegistrationNumberFront, @NotNull String residentRegistrationNumberBack,
+                         @NotNull int alarm) {
         this.callNumber = callNumber;
         this.telecom = telecom;
         this.username = username;
         this.residentRegistrationNumberFront = residentRegistrationNumberFront;
         this.residentRegistrationNumberBack = residentRegistrationNumberBack;
+        this.alarm = alarm;
     }
 
 

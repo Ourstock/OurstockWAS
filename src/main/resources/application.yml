@@ -5,7 +5,7 @@ spring:
     username: apiuserk21
     password: dufTlagltkfwk2021
 
-
+#
 #spring:
 #  datasource:
 #    url: jdbc:mysql://localhost:3306/ourstock?characterEncoding=UTF-8&amp&serverTimezone=Asia/Seoul
@@ -28,13 +28,12 @@ spring:
         format_sql: true
 #        show_sql: true
 
-#server:
-#  port: 9010
+server:
+  port: 9010
 
 jwt:
-  header: Authorization
-  secret: LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS1NSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXQ2R2pnSlRKVXp0ejdBVG0zK3ZZUEdubm90UTVoRlg1N09MMVVrTG9xVktyK3NmUzZEeENsOWY0LzJMODE4VExZYnRuMGg5R25VT2YvOFhKTFFwV3krQjZ1SzNYMHZWTUp5ellxSWFScmhVU3RaVFhVbnhPd1NDekVrMnNxN01UMmFrU3RBNFF3dHNKOWI2WWJrV3E0VHAwbWwwa1dZc3FJREVMbnphN1lKUmptRFIvQUZQYnFpRmRDQU5GcFV0dXEvaGVpVnV4OXZaYjg4MWRZVW1rY1l0QzN2b0gySitLWUFvQ21sak90ZzMzaW9lVkJMa3JoekdXLzd1MlhKK0VMVHJrN1pyWHJEeHBRbVlhTDNhb2pNdjYwQkZJK1dvWTR4RmpyVGFpMkQxZmFvMzJJNnNPY0lUeVk2Szc0SENvK0Z5eDZjYzZVaUpFTzViREdyZkZOUUlEQVFBQi0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo=
-  token-validity-in-seconds: 86400
+  secret: OurstockWas2021ServiceStaRtSeCretKeY
+
 
 logging:
   level:

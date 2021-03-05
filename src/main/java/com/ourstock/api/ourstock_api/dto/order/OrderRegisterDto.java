@@ -3,12 +3,13 @@ package com.ourstock.api.ourstock_api.dto.order;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Getter
 public class OrderRegisterDto {
 
     @NotNull
-    private long userId;
+    private UUID userId;
 
     @NotNull
     private String channelId;
@@ -24,7 +25,7 @@ public class OrderRegisterDto {
 
     protected OrderRegisterDto() { super(); }
 
-    public OrderRegisterDto(@NotNull long userId, @NotNull String channelId, @NotNull long orderCount, @NotNull long orderCost, @NotNull String type) {
+    public OrderRegisterDto(@NotNull UUID userId, @NotNull String channelId, @NotNull long orderCount, @NotNull long orderCost, @NotNull String type) {
         this.userId = userId;
         this.channelId = channelId;
         this.orderCount = orderCount;
