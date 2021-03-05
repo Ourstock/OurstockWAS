@@ -5,7 +5,7 @@ spring:
     username: apiuserk21
     password: dufTlagltkfwk2021
 
-#
+
 #spring:
 #  datasource:
 #    url: jdbc:mysql://localhost:3306/ourstock?characterEncoding=UTF-8&amp&serverTimezone=Asia/Seoul
@@ -39,7 +39,7 @@ logging:
   level:
     "[org.hibernate]" : ERROR
 
-
+#
 server:
   port: 9090
 

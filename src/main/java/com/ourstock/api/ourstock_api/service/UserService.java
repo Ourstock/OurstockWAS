@@ -95,7 +95,6 @@ public class UserService {
                 .userId(userEntity.getUserId())
                 .jwtToken(userEntity.getJwtToken())
                 .jwtRefreshToken(userEntity.getJwtRefreshToken())
-                .isSuccessLogin(true)
                 .build();
     }
 
